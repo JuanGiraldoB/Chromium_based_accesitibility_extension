@@ -1,0 +1,55 @@
+{
+    "name": "Accesibility toolbar",
+    "description": "Build an Extension!",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content_script.js"
+            ]
+        }
+    ],
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "/images/size16.png",
+            "32": "/images/size32.png",
+            "48": "/images/size48.png",
+            "128": "/images/size128.png"
+        }
+    },
+    "icons": {
+        "16": "/images/size16.png",
+        "32": "/images/size32.png",
+        "48": "/images/size48.png",
+        "128": "/images/size128.png"
+    },
+    "commands": {
+        "Ctrl+M": {
+            "suggested_key": {
+                "default": "Ctrl+M",
+                "mac": "Command+M"
+            },
+            "description": "Ctrl+M."
+        },
+        "Ctrl+L": {
+            "suggested_key": {
+                "default": "Ctrl+L",
+                "mac": "Command+L"
+            },
+            "description": "Ctrl+L"
+        }
+    }
+}
