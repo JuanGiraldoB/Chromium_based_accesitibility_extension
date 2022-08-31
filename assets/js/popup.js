@@ -65,23 +65,26 @@ function loadData() {
 
     new Promise(resolve => {
 
-        chrome.storage.local.get(["textSize", "textFamily"], function (result) {
+        chrome.storage.local.get(["textSize", "textFamily", "lineHeight"], function (result) {
             console.log("Current text size: " + result.textSize)
             console.log("Current text family: " + result.textFamily)
+            console.log("Current line height: " + result.lineHeight)
             let data = {
                 "textFamily": result.textFamily,
-                "textSize": result.textSize
+                "textSize": result.textSize,
+                "lineHeight": result.lineHeight
             }
             resolve(data);
         })
 
     }).then(data => {
-        console.log("Changing text size...")
+        console.log("Changing values...")
 
-        tags = document.getElementsByTagName("*");
+        var tags = document.getElementsByTagName("*");
         for (let i = 0; i < tags.length; i++) {
             tags[i].style.fontSize = data["textSize"] + "px";
             tags[i].style.fontFamily = data["TextFamily"];
+            tags[i].style.lineHeight = data["lineHeight"] + "";
         }
 
         console.log("Done")
@@ -125,14 +128,80 @@ function commandTest() {
     });
 }
 
-// Change line height
+// Increase line height
+const increaseLines = document.getElementById("increaseLine")
 
-function changeLineHeight() {
-    tags = document.getElementsByTagName("*");
+increaseLines.addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
-    for (let i = 0; i < tags.length; i++) {
-        tags[i].style.lineHeight = '3';
-    }
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: increaseLineHeight
+    });
+});
+
+function increaseLineHeight() {
+    new Promise(resolve => {
+
+        chrome.storage.local.get(["lineHeight"], function (result) {
+            console.log("Current line height: " + result.lineHeight)
+            resolve(result.lineHeight);
+        })
+
+    }).then(lineHeight => {
+        lineHeight += 0.5;
+        tags = document.getElementsByTagName("*");
+        for (let i = 0; i < tags.length; i++) {
+            //var size = parseInt(window.getComputedStyle(tags[i], null).getPropertyValue("font-size")) - 1;
+            tags[i].style.lineHeight = lineHeight + "";
+        }
+
+        chrome.storage.local.set({ lineHeight: lineHeight}, () => {
+            console.log("Saved line height:" + lineHeight);
+        });
+
+    });
+
+}
+
+// Reduce line height
+const reduceLines = document.getElementById("reduceLine")
+
+reduceLines.addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: reduceLineHeight
+    });
+});
+
+function reduceLineHeight() {
+    new Promise(resolve => {
+
+        chrome.storage.local.get(["lineHeight"], function (result) {
+            console.log("Current line height: " + result.lineHeight)
+            resolve(result.lineHeight);
+        })
+
+    }).then(lineHeight => {
+        lineHeight -= 0.5;
+
+        if (lineHeight < 1) {
+            lineHeight = 1;
+        }
+        
+        tags = document.getElementsByTagName("*");
+        for (let i = 0; i < tags.length; i++) {
+            //var size = parseInt(window.getComputedStyle(tags[i], null).getPropertyValue("font-size")) - 1;
+            tags[i].style.lineHeight = lineHeight + "";
+        }
+
+        chrome.storage.local.set({ lineHeight: lineHeight}, () => {
+            console.log("Saved line height:" + lineHeight);
+        });
+
+    });
 
 }
 
@@ -152,18 +221,18 @@ tts.addEventListener("click", async () => {
 function textToSpeech() {
     let msg = new SpeechSynthesisUtterance();
     msg.text = "";
-    
+
     tags = document.querySelectorAll("p, span, h1, h2, h3, a, code");
 
     tags.forEach((tag) => {
         tag.addEventListener('click', (e) => {
-            
+
             msg.text = e.target.innerText;
             tag.style.backgroundColor = "yellow";
             window.speechSynthesis.speak(msg);
-            
+
             let interval = setInterval(() => {
-                if(!speechSynthesis.speaking){
+                if (!speechSynthesis.speaking) {
                     tag.style.removeProperty('background-color');;
                     clearInterval(interval);
                 }
