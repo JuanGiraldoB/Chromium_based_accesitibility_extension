@@ -156,7 +156,7 @@ function increaseLineHeight() {
             tags[i].style.lineHeight = lineHeight + "";
         }
 
-        chrome.storage.local.set({ lineHeight: lineHeight}, () => {
+        chrome.storage.local.set({ lineHeight: lineHeight }, () => {
             console.log("Saved line height:" + lineHeight);
         });
 
@@ -190,14 +190,14 @@ function reduceLineHeight() {
         if (lineHeight < 1) {
             lineHeight = 1;
         }
-        
+
         tags = document.getElementsByTagName("*");
         for (let i = 0; i < tags.length; i++) {
             //var size = parseInt(window.getComputedStyle(tags[i], null).getPropertyValue("font-size")) - 1;
             tags[i].style.lineHeight = lineHeight + "";
         }
 
-        chrome.storage.local.set({ lineHeight: lineHeight}, () => {
+        chrome.storage.local.set({ lineHeight: lineHeight }, () => {
             console.log("Saved line height:" + lineHeight);
         });
 
@@ -208,39 +208,66 @@ function reduceLineHeight() {
 // Text to speech
 const tts = document.getElementById("tts");
 
-tts.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
+tts.addEventListener("click", async () => {
+    const ttsFlag = tts.value === "true" ? true: false;
+    tts.value = !ttsFlag + ""
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
         function: textToSpeech,
+        args: [tts.value]
     });
 });
 
 
-function textToSpeech() {
-    let msg = new SpeechSynthesisUtterance();
+function textToSpeech(ttsValue) {
+    tags = document.querySelectorAll("p, span, h1, h2, h3, a, b, img, td");
+
+    if (ttsValue != "true") {
+
+        tags.forEach((tag) => {
+            tag.setAttribute("ttsActive", "false")
+        })
+
+        return;
+
+    }else {
+        tags.forEach((tag) => {
+            tag.setAttribute("ttsActive", "true")
+        })
+    }
+
+    var msg = new SpeechSynthesisUtterance();
+    var language = document.documentElement.lang;
+
+    msg.lang = language == "es" ? "es" : "en";
+
     msg.text = "";
 
-    tags = document.querySelectorAll("p, span, h1, h2, h3, a, code");
-
     tags.forEach((tag) => {
-        tag.addEventListener('click', (e) => {
+        tag.addEventListener('mouseenter', (e) => {
 
-            msg.text = e.target.innerText;
+            if (tag.getAttribute("ttsActive") === "false") return;
+
+            if (tag.tagName == "IMG") {
+                msg.text = tag.alt;
+            } else {
+                msg.text = e.target.innerText;
+            }
+
+
             tag.style.backgroundColor = "yellow";
             window.speechSynthesis.speak(msg);
 
             let interval = setInterval(() => {
                 if (!speechSynthesis.speaking) {
-                    tag.style.removeProperty('background-color');;
+                    tag.style.removeProperty('background-color');
                     clearInterval(interval);
                 }
             }, 100);
 
         });
     });
-
-    //window.speechSynthesis.speak(text)
 
 }
