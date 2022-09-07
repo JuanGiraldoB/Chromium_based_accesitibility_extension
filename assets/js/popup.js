@@ -6,13 +6,13 @@ enlarge.addEventListener("click", async () => {
 
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
-        function: enlargeText,
-        //args: ["prueba"]
+        function: enlargeText
     });
 });
 
 function enlargeText() {
     tags = document.getElementsByTagName("*");
+
     for (let i = 0; i < tags.length; i++) {
         var size = parseInt(window.getComputedStyle(tags[i], null).getPropertyValue("font-size")) + 1;
         tags[i].style.fontSize = size + "px";
@@ -38,6 +38,7 @@ reduce.addEventListener("click", async () => {
 
 function reduceText() {
     tags = document.getElementsByTagName("*");
+
     for (let i = 0; i < tags.length; i++) {
         var size = parseInt(window.getComputedStyle(tags[i], null).getPropertyValue("font-size")) - 1;
         tags[i].style.fontSize = size + "px";
@@ -83,7 +84,7 @@ function loadData() {
         var tags = document.getElementsByTagName("*");
         for (let i = 0; i < tags.length; i++) {
             tags[i].style.fontSize = data["textSize"] + "px";
-            tags[i].style.fontFamily = data["TextFamily"];
+            tags[i].style.fontFamily = data["textFamily"];
             tags[i].style.lineHeight = data["lineHeight"] + "";
         }
 
@@ -106,6 +107,7 @@ font.addEventListener("change", async () => {
 
 function changeFontFamily(newFont) {
     tags = document.getElementsByTagName("*");
+
     for (let i = 0; i < tags.length; i++) {
         tags[i].style.fontFamily = newFont;
     }
@@ -150,7 +152,13 @@ function increaseLineHeight() {
 
     }).then(lineHeight => {
         lineHeight += 0.5;
+
+        if (lineHeight > 3) {
+            lineHeight = 3;
+        }
+
         tags = document.getElementsByTagName("*");
+
         for (let i = 0; i < tags.length; i++) {
             //var size = parseInt(window.getComputedStyle(tags[i], null).getPropertyValue("font-size")) - 1;
             tags[i].style.lineHeight = lineHeight + "";
@@ -192,6 +200,7 @@ function reduceLineHeight() {
         }
 
         tags = document.getElementsByTagName("*");
+
         for (let i = 0; i < tags.length; i++) {
             //var size = parseInt(window.getComputedStyle(tags[i], null).getPropertyValue("font-size")) - 1;
             tags[i].style.lineHeight = lineHeight + "";
@@ -206,50 +215,59 @@ function reduceLineHeight() {
 }
 
 // Text to speech
+// ToDo: Avoid having to click twice to change tts.value
 const tts = document.getElementById("tts");
 
-
 tts.addEventListener("click", async () => {
-    const ttsFlag = tts.value === "true" ? true: false;
-    tts.value = !ttsFlag + ""
+    tts.value = tts.value === "true" ? "false" : "true";
+
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
         function: textToSpeech,
-        args: [tts.value]
+        args: [tts.value, tts]
     });
 });
 
 
 function textToSpeech(ttsValue) {
-    tags = document.querySelectorAll("p, span, h1, h2, h3, a, b, img, td");
+    var tags = document.querySelectorAll("p, span, h1, h2, h3, h4, a, b, img, td");
 
-    if (ttsValue != "true") {
+    // if the tags have the "addedFunction" attribute it means the eventIstener has already
+    // been added to the tags so there is no need to run the "for each" after this if statement
+    if (tags[0].hasAttribute("addedFunction")) {
+        if (ttsValue != "true") {
+            console.log("1: ")
+            tags.forEach((tag) => {
+                tag.setAttribute("ttsActive", "false")
+            })
 
-        tags.forEach((tag) => {
-            tag.setAttribute("ttsActive", "false")
-        })
+            return;
 
-        return;
+        } else {
+            console.log("2: ")
+            tags.forEach((tag) => {
+                tag.setAttribute("ttsActive", "true")
+            })
 
-    }else {
-        tags.forEach((tag) => {
-            tag.setAttribute("ttsActive", "true")
-        })
+            return;
+        }
     }
 
-    var msg = new SpeechSynthesisUtterance();
-    var language = document.documentElement.lang;
-
-    msg.lang = language == "es" ? "es" : "en";
-
-    msg.text = "";
-
     tags.forEach((tag) => {
-        tag.addEventListener('mouseenter', (e) => {
+        tag.setAttribute("addedFunction", "1")
+        tag.addEventListener("click", function clicked(e) {
 
-            if (tag.getAttribute("ttsActive") === "false") return;
+            var msg = new SpeechSynthesisUtterance();
+            var language = document.documentElement.lang;
 
+            msg.rate = 5;
+            msg.lang = language == "es" ? "es" : "en";
+            msg.text = "";
+
+            if (tag.getAttribute("ttsActive") === "false") {
+                return;
+            }
             if (tag.tagName == "IMG") {
                 msg.text = tag.alt;
             } else {
@@ -262,12 +280,48 @@ function textToSpeech(ttsValue) {
 
             let interval = setInterval(() => {
                 if (!speechSynthesis.speaking) {
+                    window.speechSynthesis.cancel();
                     tag.style.removeProperty('background-color');
                     clearInterval(interval);
+                    msg.text = "";
                 }
-            }, 100);
+            }, 1000);
 
         });
     });
+
+}
+
+// Pause - Resume TTS
+const pauseResumeTTS = document.getElementById("pauseResumeTTS");
+
+pauseResumeTTS.addEventListener("click", async () => {
+
+    if (pauseResumeTTS.value === "pause") {
+        pauseResumeTTS.value = "resume";
+        pauseResumeTTS.innerHTML = '<i class="bi bi-pause-circle-fill"></i>'
+    } else {
+        pauseResumeTTS.value = "pause";
+        pauseResumeTTS.innerHTML = '<i class="bi bi-play-circle-fill"></i>'
+    }
+
+    // pauseResumeTTS.value = pauseResumeTTS.value === "pause" ? "resume": "pause";
+
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: stopTTS,
+        args: [pauseResumeTTS.value]
+    });
+});
+
+function stopTTS(pause) {
+    console.log(pause)
+
+    if (pause === "pause") {
+        window.speechSynthesis.pause();
+    } else {
+        window.speechSynthesis.resume();
+    }
 
 }
