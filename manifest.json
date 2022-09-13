@@ -25,5 +25,10 @@
         "32": "/images/size32.png",
         "48": "/images/size48.png",
         "128": "/images/size128.png"
-    }
+    },
+    "host_permissions": [
+        "https://*/*",
+        "http://*/*",
+        "file:///*"
+    ]
 }
