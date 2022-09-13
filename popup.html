@@ -2,30 +2,51 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div class="parent flex-parent">
-        <button id="enlarge" class="child flex-child"><i class="bi bi-zoom-in"></i></i></button>
-        <button id="reduce" class="child flex-child"><i class="bi bi-zoom-out"></i></i></button>
-        <button id="tts" class="child flex-child" value="false"><i class="bi bi-speaker"></i></i></button>
-        <button id="increaseLine" class="child flex-child"><i class="bi bi-arrows-expand"></i></i></button>
-        <button id="reduceLine" class="child flex-child"><i class="bi bi-arrows-collapse"></i></i></button>
-        <button id="load" class="child flex-child"><i class="bi bi-cloud-download"></i></i></button>
-        <select id="fontFamily">
-            <option style="font-family: Arial" value="Arial">Arial</option>
-            <option style="font-family: Calibri" value="Calibri">Calibri</option>
-            <option style="font-family: Century Gothic" value="Century Gothic">Century Gothic</option>
-            <option style="font-family: Helvetica" value="Helvetica">Helvetica</option>
-            <option style="font-family: Tahoma" value="Tahoma">Tahoma</option>
-            <option style="font-family: Verdana" value="Verdana">Verdana</option>
-        </select>
-        <button id="pauseResumeTTS" class="child flex-child" value="pause"><i class="bi bi-play-circle-fill"></i></button>
-    </div>
+        <div class="parent flex-parent">
+                <button id="enlarge" class="child flex-child"><i class="bi bi-zoom-in"></i></i></button><br />
+                <button id="reduce" class="child flex-child"><i class="bi bi-zoom-out"></i></i></button>
+                <button id="increaseLine" class="child flex-child"><i class="bi bi-arrows-expand"></i></i></button>
+                <button id="reduceLine" class="child flex-child"><i class="bi bi-arrows-collapse"></i></i></button>
+                <label for="colorPickerA">a tag<input id="colorPickerA" name="colorPickerA" type="color"
+                                value="#000000"></label>
+                <label for="colorPickerS">span tag<input id="colorPickerS" name="colorPickerS" type="color"
+                                value="#000000"></label>
+                <label for="colorPickerH1">h1 tag<input id="colorPickerH1" name="colorPickerH1" type="color"
+                                value="#000000"></label>
+                <label for="colorPickerH2">h2 tag<input id="colorPickerH2" name="colorPickerH2" type="color"
+                                value="#000000"></label>
+                <label for="colorPickerH3">h3 tag<input id="colorPickerH3" name="colorPickerH3" type="color"
+                                value="#000000"></label>
+                <label for="colorPickerH4">h4 tag<input id="colorPickerH4" name="colorPickerH4" type="color"
+                                value="#000000"></label>
+                <label for="colorPickerH5">h5 tag<input id="colorPickerH5" name="colorPickerH5" type="color"
+                                value="#000000"></label>
+                <select id="fontFamily">
+                        <option style="font-family: Arial" value="Arial">Arial</option>
+                        <option style="font-family: Calibri" value="Calibri">Calibri</option>
+                        <option style="font-family: Century Gothic" value="Century Gothic">Century Gothic</option>
+                        <option style="font-family: Helvetica" value="Helvetica">Helvetica</option>
+                        <option style="font-family: Tahoma" value="Tahoma">Tahoma</option>
+                        <option style="font-family: Verdana" value="Verdana">Verdana</option>
+                </select>
 
-    <script src="assets/js/popup.js"></script>
+                <button id="tts" class="child flex-child" value="false"><i class="bi bi-speaker"></i></i></button>
+                <button id="pauseResumeTTS" class="child flex-child" value="pause"><i
+                                class="bi bi-pause-circle-fill"></i></button>
+
+                <button id="load" class="child flex-child"><i class="bi bi-cloud-download"></i></i></button>
+
+        </div>
+
+        <script src="assets/js/textLogic.js"></script>
+        <script src="assets/js/ttsLogic.js"></script>
+        <script src="assets/js/load.js"></script>
+        <script src="assets/js/popup.js"></script>
 </body>
 
 </html>
