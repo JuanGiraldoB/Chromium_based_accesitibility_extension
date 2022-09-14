@@ -1,20 +1,6 @@
 const tts = document.getElementById("tts");
 const pauseResumeTTS = document.getElementById("pauseResumeTTS");
 
-chrome.runtime.sendMessage({ msg: "load" }, function (response) {
-    console.log("current: " + response.ttsPauseResume)
-    tts.value = response.ttsRunning
-    if (response.ttsPauseResume === "pause") {
-        pauseResumeTTS.value = "pause" 
-        pauseResumeTTS.innerHTML = '<i class="bi bi-pause-circle-fill"></i>'
-        
-    } else {
-        pauseResumeTTS.value = "resume"
-        pauseResumeTTS.innerHTML = '<i class="bi bi-play-circle-fill"></i>'
-    }
-});
-
-
 tts.addEventListener("click", async () => {
     console.log(tts)
     tts.value = tts.value === "true" ? "false" : "true";

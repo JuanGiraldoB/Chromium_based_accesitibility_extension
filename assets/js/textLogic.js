@@ -158,96 +158,27 @@ function reduceLineHeight() {
 
 }
 
-// Change font color <a>
-const colorPickerA = document.getElementById("colorPickerA");
+// Change font color <tag>
+const colorPicker = document.getElementById("colorPicker");
 
-colorPickerA.addEventListener("input", async () => {
+colorPicker.addEventListener("input", async () => {
+
+    const tagToColor = document.getElementById("tagToColor");
+
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
         function: changeColor,
-        args: [colorPickerA.value, "a"]
+        args: [colorPicker.value, tagToColor.value]
     });
 });
 
-// Change font color <span>
-const colorPickerS = document.getElementById("colorPickerS");
-
-colorPickerS.addEventListener("input", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        function: changeColor,
-        args: [colorPickerS.value, "s"]
-    });
-});
-
-// Change font color <h1>
-const colorPickerH1 = document.getElementById("colorPickerH1");
-
-colorPickerH1.addEventListener("input", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        function: changeColor,
-        args: [colorPickerH1.value, "h1"]
-    });
-});
-
-// Change font color <h2>
-const colorPickerH2 = document.getElementById("colorPickerH2");
-
-colorPickerH2.addEventListener("input", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        function: changeColor,
-        args: [colorPickerH2.value, "h2"]
-    });
-});
-
-// Change font color <h3>
-const colorPickerH3 = document.getElementById("colorPickerH3");
-
-colorPickerH3.addEventListener("input", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        function: changeColor,
-        args: [colorPickerH3.value, "h3"]
-    });
-});
-
-// Change font color <h4>
-const colorPickerH4 = document.getElementById("colorPickerH4");
-
-colorPickerH4.addEventListener("input", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        function: changeColor,
-        args: [colorPickerH4.value, "h4"]
-    });
-});
-
-// Change font color <h5>
-const colorPickerH5 = document.getElementById("colorPickerH5");
-
-colorPickerH5.addEventListener("input", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        function: changeColor,
-        args: [colorPickerH5.value, "h5"]
-    });
-});
-
-
-function changeColor(val, tag) {
-    tags = document.getElementsByTagName(tag);
+function changeColor(color, tag) {
+    tags = document.querySelectorAll(tag);
+    console.log(color)
+    console.log(tag)
 
     for (let i = 0; i < tags.length; i++) {
-        tags[i].style.color = val
+        tags[i].style.color = color
     }
 }
-
