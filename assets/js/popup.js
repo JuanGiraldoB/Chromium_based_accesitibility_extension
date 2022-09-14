@@ -1,32 +1,29 @@
-// Load saved data
-const load = document.getElementById("load");
+// Loads extension's last state
+chrome.runtime.sendMessage({ msg: "load" }, function (response) {
+    tts.value = response.ttsRunning
 
-load.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (response.ttsPauseResume === "pause") {
+        pauseResumeTTS.value = "pause" 
+        pauseResumeTTS.innerHTML = '<i class="bi bi-pause-circle-fill"></i>'
+        
+    } else {
+        pauseResumeTTS.value = "resume"
+        pauseResumeTTS.innerHTML = '<i class="bi bi-play-circle-fill"></i>'
+    }
+    
+    enlarge.style.display = response.displayEnlarge;
+    reduce.style.display = response.displayReduce;
+    increaseLines.style.display = response.displayIncreaseLineHeight;
+    reduceLines.style.display = response.displayReduceLineHeight;
+    font.style.display = response.displayFont;
+    document.getElementById("lblSelectColor").style.display = response.displayColorPicker;
+    colorPicker.style.display = response.displayColorPicker;
+    tagToColor.style.display = response.displayColorPicker;
 
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        function: loadSettings,
-    });
+    tts.style.display = response.displayTTS;
+    pauseResumeTTS.style.display = response.displayTTS;
+    openOptions.style.display = response.displayOptions;
+
+    load.style.display = response.displayLoadSettings;
+
 });
-
-function loadSettings() {
-    console.log("Loading settings...")
-
-    chrome.storage.local.get(["textSize", "textFamily", "lineHeight"], function (result) {
-        console.log("Current text size: " + result.textSize)
-        console.log("Current text family: " + result.textFamily)
-        console.log("Current line height: " + result.lineHeight)
-
-        var tags = document.getElementsByTagName("*");
-
-        for (let i = 0; i < tags.length; i++) {
-            tags[i].style.fontFamily = result.textFamily;
-            tags[i].style.fontSize = result.textSize + "px";
-            tags[i].style.lineHeight = result.lineHeight + "";
-        }
-
-        console.log("Done")
-    })
-
-}
