@@ -12,20 +12,16 @@
                 <button id="reduce" class="child flex-child"><i class="bi bi-zoom-out"></i></i></button>
                 <button id="increaseLine" class="child flex-child"><i class="bi bi-arrows-expand"></i></i></button>
                 <button id="reduceLine" class="child flex-child"><i class="bi bi-arrows-collapse"></i></i></button>
-                <label for="colorPickerA">a tag<input id="colorPickerA" name="colorPickerA" type="color"
-                                value="#000000"></label>
-                <label for="colorPickerS">span tag<input id="colorPickerS" name="colorPickerS" type="color"
-                                value="#000000"></label>
-                <label for="colorPickerH1">h1 tag<input id="colorPickerH1" name="colorPickerH1" type="color"
-                                value="#000000"></label>
-                <label for="colorPickerH2">h2 tag<input id="colorPickerH2" name="colorPickerH2" type="color"
-                                value="#000000"></label>
-                <label for="colorPickerH3">h3 tag<input id="colorPickerH3" name="colorPickerH3" type="color"
-                                value="#000000"></label>
-                <label for="colorPickerH4">h4 tag<input id="colorPickerH4" name="colorPickerH4" type="color"
-                                value="#000000"></label>
-                <label for="colorPickerH5">h5 tag<input id="colorPickerH5" name="colorPickerH5" type="color"
-                                value="#000000"></label>
+
+                <select id="tagToColor">
+                        <option value="a,cite">Links</option>
+                        <option value="em,strong,b,mark">Bold</option>
+                        <option value="span,p,div,td,th">Text</option>
+                        <option value="h1,h2,h3,h4,h5">Titles</option>
+                </select>
+                <label for="colorPicker" id="lblSelectColor">Select Color<input id="colorPicker" name="colorPicker" type="color"
+                        value="#ffffff"></label>
+
                 <select id="fontFamily">
                         <option style="font-family: Arial" value="Arial">Arial</option>
                         <option style="font-family: Calibri" value="Calibri">Calibri</option>
@@ -40,12 +36,13 @@
                                 class="bi bi-pause-circle-fill"></i></button>
 
                 <button id="load" class="child flex-child"><i class="bi bi-cloud-download"></i></i></button>
+                <button id="goToOptions" style="display:block">Go to options</button>
 
         </div>
 
         <script src="assets/js/textLogic.js"></script>
         <script src="assets/js/ttsLogic.js"></script>
-        <script src="assets/js/load.js"></script>
+        <script src="assets/js/loadExtensionSettings.js"></script>
         <script src="assets/js/popup.js"></script>
 </body>
 
