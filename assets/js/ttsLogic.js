@@ -43,7 +43,9 @@ function textToSpeech(ttsRunning) {
 
     tags.forEach((tag) => {
         tag.setAttribute("addedFunction", "1")
-        tag.addEventListener("click", function clicked(e) {
+        tag.addEventListener("click", (e) => {
+
+            e.stopPropagation();
 
             if (tag.getAttribute("ttsActive") === "false") {
                 return;
