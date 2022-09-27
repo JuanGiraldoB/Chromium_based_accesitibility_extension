@@ -1,6 +1,6 @@
 {
     "name": "Accesibility toolbar",
-    "description": "Build an Extension!",
+    "description": "Customizable accesibility toolbar",
     "version": "1.0",
     "manifest_version": 3,
     "options_page": "options.html",
@@ -31,5 +31,40 @@
         "https://*/*",
         "http://*/*",
         "file:///*"
-    ]
+    ],
+    "commands": {
+        "_execute_action": {
+            "suggested_key": {
+                "default": "Ctrl+Q"
+            }
+        },
+        "enlarge-text": {
+            "suggested_key": "Alt+1",
+            "description": "Enlarge text"
+        },
+        "reduce-text": {
+            "suggested_key": "Alt+2",
+            "description": "Reduce text"
+        },
+        "increase-line-height": {
+            "suggested_key": "Alt+3",
+            "description": "Increase line height"
+        },
+        "reduce-line-height": {
+            "description": "Reduce line height"
+        },
+        "invert-colors": {
+            "description": "Invert colors"
+        },
+        "go-to-options": {
+            "description": "Go to extension options"
+        },
+        "activate-tts": {
+            "description": "Activate Text to Speech"
+        },
+        "pause/resume-tts": {
+            "description": "Pause or continue Text to Speech"
+        }
+
+    }
 }
