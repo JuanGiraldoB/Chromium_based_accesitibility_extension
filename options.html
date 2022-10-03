@@ -16,8 +16,20 @@
     <label><input type="checkbox" id="checkColorPicker" checked>Texts color change</label></br>
     <label><input type="checkbox" id="checkFont" checked>Font family</label></br>
     <label><input type="checkbox" id="checkTTS" checked>Text to speech </label></br>
+    <label><input type="checkbox" id="checkInvertColor" checked>Invert Color</label></br>
     <label><input type="checkbox" id="checkLoadSettings" checked>Load settings</label></br>
     <label><input type="checkbox" id="checkOptions" checked>"Go to options" button</label></br>
+
+    <p>Set text to speech pitch</p>
+    <label for="female">Female voice:</label><input type="radio" name="ttsGenre" class="ttsVoiceGenere" value="2"
+        checked />
+    <label for="male">Male voice:</label><input type="radio" name="ttsGenre" class="ttsVoiceGenere" value="1" />
+
+    <p>Set text to speech pitch</p>
+    <input id="ttsPitch" type="range" min="1" max="2" value="1" step="0.2">
+
+    <p>Set text to speech speed</p>
+    <input id="ttsSpeed" type="range" min="1" max="10" value="1" step="0.5"><br/>
 
     <button id="save">Save</button>
 
