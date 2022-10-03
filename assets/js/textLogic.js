@@ -1,46 +1,41 @@
-// Enlarge text
-const enlarge = document.getElementById("enlarge");
+// Change text size
+const increaseText = document.getElementById("increaseText");
 
-enlarge.addEventListener("click", async () => {
+increaseText.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
-        function: enlargeText
+        function: changeTextSize,
+        args: ["increase"]
     });
 });
 
-function enlargeText() {
-    tags = document.getElementsByTagName("*");
+const reduceText = document.getElementById("reduceText");
 
-    for (let i = 0; i < tags.length; i++) {
-        var size = parseInt(window.getComputedStyle(tags[i], null).getPropertyValue("font-size")) + 1;
-        tags[i].style.fontSize = size + "px";
-    }
-
-    chrome.storage.sync.set({ textSize: size }, () => {
-        console.log("Saved text size:" + size);
-    });
-}
-
-// Reduce text
-const reduce = document.getElementById("reduce");
-
-reduce.addEventListener("click", async () => {
+reduceText.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
-        function: reduceText,
+        function: changeTextSize,
+        args: ["reduce"]
     });
 });
 
-
-function reduceText() {
-    tags = document.getElementsByTagName("*");
+function changeTextSize(type) {
+    var tags = document.getElementsByTagName("*");
+    var titles = ["H1", "H2", "H3", "H4", "H5"];
 
     for (let i = 0; i < tags.length; i++) {
-        var size = parseInt(window.getComputedStyle(tags[i], null).getPropertyValue("font-size")) - 1;
+        var size = parseInt(window.getComputedStyle(tags[i], null).getPropertyValue("font-size"));
+
+        if (type === "increase") {
+            size += 1;
+        } else {
+            size -= 1;
+        }
+
         tags[i].style.fontSize = size + "px";
     }
 
@@ -63,7 +58,7 @@ font.addEventListener("change", async () => {
 });
 
 function changeFontFamily(newFont) {
-    tags = document.getElementsByTagName("*");
+    var tags = document.getElementsByTagName("*");
 
     for (let i = 0; i < tags.length; i++) {
         tags[i].style.fontFamily = newFont;
@@ -75,65 +70,45 @@ function changeFontFamily(newFont) {
 }
 
 // Increase line height
-const increaseLines = document.getElementById("increaseLine")
+const increaseLines = document.getElementById("increaseLine");
 
 increaseLines.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
-        function: increaseLineHeight
+        function: changeLineHeight,
+        args: ["increase"]
     });
 });
 
-function increaseLineHeight() {
-
-    chrome.storage.sync.get(["lineHeight"], function (result) {
-        console.log("Current line height: " + result.lineHeight)
-        var lineHeight = result.lineHeight;
-        lineHeight += 0.5;
-
-        if (lineHeight > 3) {
-            lineHeight = 3;
-        }
-
-        tags = document.getElementsByTagName("*");
-
-        for (let i = 0; i < tags.length; i++) {
-            //var size = parseInt(window.getComputedStyle(tags[i], null).getPropertyValue("font-size")) - 1;
-            tags[i].style.lineHeight = lineHeight + "";
-        }
-
-        chrome.storage.sync.set({ lineHeight: lineHeight }, () => {
-            console.log("Saved line height:" + lineHeight);
-        });
-    });
-}
-
 // Reduce line height
-const reduceLines = document.getElementById("reduceLine")
+const reduceLines = document.getElementById("reduceLine");
 
 reduceLines.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
-        function: reduceLineHeight
+        function: changeLineHeight,
+        args: ["reduce"]
     });
 });
 
-function reduceLineHeight() {
-
+function changeLineHeight(type) {
     chrome.storage.sync.get(["lineHeight"], function (result) {
-        console.log("Current line height: " + result.lineHeight)
+        console.log("Current line height: " + result.lineHeight);
         var lineHeight = result.lineHeight;
-        lineHeight -= 0.5;
 
-        if (lineHeight < 1) {
+        lineHeight = type === "increase" ? lineHeight + 0.5 : lineHeight - 0.5;
+
+        if (lineHeight > 3) {
+            lineHeight = 3;
+        } else if (lineHeight < 1) {
             lineHeight = 1;
         }
 
-        tags = document.getElementsByTagName("*");
+        var tags = document.getElementsByTagName("*");
 
         for (let i = 0; i < tags.length; i++) {
             tags[i].style.lineHeight = lineHeight + "";
@@ -142,11 +117,11 @@ function reduceLineHeight() {
         chrome.storage.sync.set({ lineHeight: lineHeight }, () => {
             console.log("Saved line height:" + lineHeight);
         });
-
-    })
+    });
 }
 
-// Change font color, text or links
+
+// Change font color, text/links/titles
 const colorPicker = document.getElementById("colorPicker");
 
 colorPicker.addEventListener("input", async () => {
@@ -165,7 +140,7 @@ function changeColor(color, tag) {
     var tags = document.querySelectorAll(tag);
 
     for (let i = 0; i < tags.length; i++) {
-        tags[i].style.color = color
+        tags[i].style.color = color;
     }
 
     if (tag === "a,cite") {
@@ -197,7 +172,53 @@ invertColor.addEventListener("click", async () => {
 });
 
 function invertBKColor() {
-    htmlFilter = document.querySelector('html');
-    console.log(htmlFilter.style.filter)
+    let htmlFilter = document.querySelector('html');
+    console.log(htmlFilter.style.filter);
     htmlFilter.style.filter = htmlFilter.style.filter === 'invert(100%)' ? 'invert(0%)' : 'invert(100%)';
+}
+
+// Change background color
+const bkColor = document.getElementById("bkColor");
+
+bkColor.addEventListener("input", async () => {
+
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: changeBKColor,
+        args: [bkColor.value]
+    });
+});
+
+function changeBKColor(color) {
+    var tags = document.querySelectorAll("*");
+
+    for (let i = 0; i < tags.length; i++) {
+        tags[i].style.backgroundColor = color;
+    }
+}
+
+// Change background color predefined
+const predefinedBkColorbtns = document.querySelectorAll(".predefinedBkColor");
+
+predefinedBkColorbtns.forEach((e) => {
+    e.addEventListener("click", async () => {
+
+        let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            function: changeBKColorPredefined,
+            args: [e.style.backgroundColor, e.style.color]
+        });
+    });
+});
+
+function changeBKColorPredefined(background, color) {
+
+    var tags = document.querySelectorAll("*");
+
+    for (let i = 0; i < tags.length; i++) {
+        tags[i].style.backgroundColor = background;
+        tags[i].style.color = color;
+    }
 }
