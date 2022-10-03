@@ -1,18 +1,17 @@
 // Loads extension's last state
 chrome.runtime.sendMessage({ msg: "load" }, function (response) {
-    tts.value = response.ttsRunning
+    tts.value = response.ttsRunning;
 
     if (response.ttsPauseResume === "pause") {
-        pauseResumeTTS.value = "pause"
-        pauseResumeTTS.innerHTML = '<i class="bi bi-pause-circle-fill"></i>'
-
+        pauseResumeTTS.value = "pause";
+        pauseResumeTTS.innerHTML = '<i class="bi bi-pause-circle-fill"></i>';
     } else {
-        pauseResumeTTS.value = "resume"
-        pauseResumeTTS.innerHTML = '<i class="bi bi-play-circle-fill"></i>'
+        pauseResumeTTS.value = "resume";
+        pauseResumeTTS.innerHTML = '<i class="bi bi-play-circle-fill"></i>';
     }
 
-    enlarge.style.display = response.displayEnlarge;
-    reduce.style.display = response.displayReduce;
+    increaseText.style.display = response.displayEnlarge;
+    reduceText.style.display = response.displayReduce;
     increaseLines.style.display = response.displayIncreaseLineHeight;
     reduceLines.style.display = response.displayReduceLineHeight;
     font.style.display = response.displayFont;
@@ -25,6 +24,7 @@ chrome.runtime.sendMessage({ msg: "load" }, function (response) {
     openOptions.style.display = response.displayOptions;
 
     load.style.display = response.displayLoadSettings;
+    invertColor.style.display = response.displayInvertColor;
 
 });
 
@@ -46,30 +46,28 @@ function checkPressedKey(command, key) {
     var func = [0, 1];
 
     if (command === "enlarge-text" || key === "1") {
-        func[0] = enlargeText;
+        func[0] = changeTextSize;
+        func[1] = "increase";
     } else if (command === "reduce-text" || key === "2") {
-        func[0] = reduceText;
+        func[0] = changeTextSize;
+        func[1] = "reduce";
     } else if (command === "increase-line-height" || key === "3") {
-        func[0] = increaseLineHeight;
+        func[0] = changeLineHeight;
+        func[1] = "increase";
     } else if (command === "reduce-line-height" || key === "4") {
-        func[0] = reduceLineHeight;
+        func[0] = changeLineHeight;
+        func[1] = "reduce";
     } else if (command === "invert-colors" || key === "5") {
         func[0] = invertBKColor;
     } else if (command === "go-to-options" || key === "6") {
         openExtensionOptions();
         return;
     } else if (command === "activate-tts" || key === "7") {
-        tts.value = tts.value === "true" ? "false" : "true";
+        changeTTSRunningValue();
         func[0] = textToSpeech;
         func[1] = tts.value;
     } else if (command === "pause/resume-tts" || key === "8") {
-        if (pauseResumeTTS.value === "pause") {
-            pauseResumeTTS.value = "resume";
-            pauseResumeTTS.innerHTML = '<i class="bi bi-play-circle-fill"></i>'
-        } else {
-            pauseResumeTTS.value = "pause";
-            pauseResumeTTS.innerHTML = '<i class="bi bi-pause-circle-fill"></i>'
-        }
+        changeTTSPauseResumeHtmlState();
         func[0] = resumePause;
         func[1] = pauseResumeTTS.value;
     } else {
@@ -95,7 +93,7 @@ chrome.commands.onCommand.addListener((command) => {
 window.addEventListener("keydown", function (event) {
     func = checkPressedKey(undefined, event.key);
 
-    if (typeof func === "undefined") {
+    if (typeof func[0] === "undefined") {
         return;
     }
 

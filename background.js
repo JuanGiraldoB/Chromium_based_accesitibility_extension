@@ -15,6 +15,7 @@ var displayLoadSettingsValue = "block";
 var fontColorValue = undefined;
 var linksColorValue = undefined;
 var titleColorValue = undefined;
+var displayInvertColorValue = "block";
 
 chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.set({
@@ -34,7 +35,8 @@ chrome.runtime.onInstalled.addListener(() => {
         displayLoadSettings: displayLoadSettingsValue,
         fontColor: fontColorValue,
         linksColor: linksColorValue,
-        titleColor: titleColorValue
+        titleColor: titleColorValue,
+        displayInvertColor: displayInvertColorValue
 
     }, () => {
         console.log("Default values set");
@@ -56,7 +58,8 @@ chrome.runtime.onMessage.addListener(
                 "displayColorPicker",
                 "displayTTS",
                 "displayOptions",
-                "displayLoadSettings"],
+                "displayLoadSettings",
+                "displayInvertColor"],
                 function (result) {
                     sendResponse({
                         ttsRunning: result.ttsRunning,
@@ -69,7 +72,8 @@ chrome.runtime.onMessage.addListener(
                         displayFont: result.displayFont,
                         displayTTS: result.displayTTS,
                         displayLoadSettings: result.displayLoadSettings,
-                        displayOptions: result.displayOptions
+                        displayOptions: result.displayOptions,
+                        displayInvertColor: result.displayInvertColor
                     });
                 });
 

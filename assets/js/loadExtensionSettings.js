@@ -11,7 +11,7 @@ load.addEventListener("click", async () => {
 });
 
 function loadSettings() {
-    console.log("Loading settings...")
+    console.log("Loading settings...");
 
     chrome.storage.sync.get(["textSize", "textFamily", "lineHeight", "fontColor", "linksColor", "titleColor"], function (result) {
         console.log("Current text size: " + result.textSize);
@@ -25,7 +25,6 @@ function loadSettings() {
         var titles = ["H1","H2","H3","H4","H5"]; // https://stackoverflow.com/questions/2430000/determine-if-string-is-in-list-in-javascript
 
         for (let i = 0; i < tags.length; i++) {
-            // console.log(tags[i].tagName);
 
             if (result.fontColor !== undefined && tags[i].tagName !== "A" && !titles.includes(tags[i].tagName)) {
                 tags[i].style.color = result.fontColor;
@@ -40,7 +39,7 @@ function loadSettings() {
             tags[i].style.lineHeight = result.lineHeight + "";
         }
 
-        console.log("Done")
+        console.log("Done");
     })
 
 }

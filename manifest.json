@@ -47,7 +47,6 @@
             "description": "Reduce text"
         },
         "increase-line-height": {
-            "suggested_key": "Alt+3",
             "description": "Increase line height"
         },
         "reduce-line-height": {
