@@ -8,19 +8,19 @@
 
 <body>
         <div class="parent flex-parent">
-                <button id="enlarge" class="child flex-child"><i class="bi bi-zoom-in"></i></i></button><br />
-                <button id="reduce" class="child flex-child"><i class="bi bi-zoom-out"></i></i></button>
+                <button id="increaseText" class="child flex-child"><i class="bi bi-zoom-in"></i></i></button><br />
+                <button id="reduceText" class="child flex-child"><i class="bi bi-zoom-out"></i></i></button>
                 <button id="increaseLine" class="child flex-child"><i class="bi bi-arrows-expand"></i></i></button>
                 <button id="reduceLine" class="child flex-child"><i class="bi bi-arrows-collapse"></i></i></button>
-
                 <select id="tagToColor">
                         <option value="a,cite">Links</option>
                         <option value="span,p,div,td,th">Text</option>
                         <option value="h1,h2,h3,h4,h5">Titles</option>
                 </select>
-                <label for="colorPicker" id="lblSelectColor">Select Color<input id="colorPicker" name="colorPicker" type="color"
-                        value="#ffffff"></label>
-
+                <label for="colorPicker" id="lblSelectColor">
+                        Select Color
+                        <input id="colorPicker" name="colorPicker" type="color" value="#ffffff"/>
+                </label>
                 <select id="fontFamily">
                         <option style="font-family: Arial" value="Arial">Arial</option>
                         <option style="font-family: Calibri" value="Calibri">Calibri</option>
@@ -29,14 +29,28 @@
                         <option style="font-family: Tahoma" value="Tahoma">Tahoma</option>
                         <option style="font-family: Verdana" value="Verdana">Verdana</option>
                 </select>
-
-                <button id="tts" class="child flex-child" value="false"><i class="bi bi-speaker"></i></i></button>
+                <button id="tts" class="child flex-child" value="false"><i class="bi bi-speaker"></i></button>
                 <button id="pauseResumeTTS" class="child flex-child" value="pause"><i
                                 class="bi bi-pause-circle-fill"></i></button>
-
-                <button id="load" class="child flex-child"><i class="bi bi-cloud-download"></i></i></button>
+                <button id="load" class="child flex-child"><i class="bi bi-cloud-download"></i></button>
                 <button id="invertColor">Invert colors</button>
                 <button id="goToOptions">Go to options</button>
+
+                <label for="bkColor" id="lblbkColor">
+                        Select background Color
+                        <input id="bkColor" name="bkColor" type="color" value="#0071bc"/>
+                </label>
+
+                <button class="predefinedBkColor" style="background-color: #00a6d2; color: #212121;">Preview</button>
+                <button class="predefinedBkColor" style="background-color: #981b1e; color: #ffffff;">Preview</button>
+                <button class="predefinedBkColor" style="background-color: #f9c642; color: #212121;">Preview</button>
+                <button class="predefinedBkColor" style="background-color: #f9dede; color: #212121;">Preview</button>
+                <button class="predefinedBkColor" style="background-color: #e1f3f8; color: #212121;">Preview</button>
+                <button class="predefinedBkColor" style="background-color: #94bfa2; color: #212121;">Preview</button>
+                <button class="predefinedBkColor" style="background-color: #e1f3f8; color: #212121;">Preview</button>
+                <button class="predefinedBkColor" style="background-color: #d6d7d9; color: #212121;">Preview</button>
+                <button class="predefinedBkColor" style="background-color: #e7f4e4; color: #212121;">Preview</button>
+
 
         </div>
 
