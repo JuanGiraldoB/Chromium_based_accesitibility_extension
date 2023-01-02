@@ -1,41 +1,47 @@
 {
-    "name": "Accesibility toolbar",
+    "name": "Tanetsi: Accesibility toolbar",
     "description": "Customizable accesibility toolbar",
     "version": "1.0",
     "manifest_version": 3,
-    "options_page": "options.html",
+    "options_page": "help.html",
     "background": {
         "service_worker": "background.js"
     },
     "permissions": [
         "storage",
         "activeTab",
-        "scripting"
+        "scripting",
+        "webNavigation",
+        "history"
     ],
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
-            "16": "/images/size16.png",
-            "32": "/images/size32.png",
-            "48": "/images/size48.png",
-            "128": "/images/size128.png"
+            "16": "assets/logo/logo_tanetsi_16_blanco.png",
+            "32": "assets/logo/logo_tanetsi_32_blanco.png",
+            "48": "assets/logo/logo_tanetsi_48_blanco.png",
+            "128": "assets/logo/logo_tanetsi_128_blanco.png"
         }
     },
     "icons": {
-        "16": "/images/size16.png",
-        "32": "/images/size32.png",
-        "48": "/images/size48.png",
-        "128": "/images/size128.png"
+        "16": "assets/logo/logo_tanetsi_16_blanco.png",
+        "32": "assets/logo/logo_tanetsi_32_blanco.png",
+        "48": "assets/logo/logo_tanetsi_48_blanco.png",
+        "128": "assets/logo/logo_tanetsi_128_blanco.png"
     },
     "host_permissions": [
         "https://*/*",
         "http://*/*",
         "file:///*"
     ],
+    "web_accessible_resources": [{
+        "resources": ["assets/custom_cursors/*/*.png"],
+        "matches": ["https://*/*", "http://*/*"]
+    }],
     "commands": {
         "_execute_action": {
             "suggested_key": {
-                "default": "Ctrl+Q"
+                "default": "Alt+Q"
             }
         },
         "enlarge-text": {
@@ -52,18 +58,20 @@
         "reduce-line-height": {
             "description": "Reduce line height"
         },
-        "invert-colors": {
-            "description": "Invert colors"
+        "spacing": {
+            "description": "Toggle space between letters"
         },
-        "go-to-options": {
-            "description": "Go to extension options"
+        "go-to-help": {
+            "description": "Go to extension's help page"
         },
         "activate-tts": {
             "description": "Activate Text to Speech"
         },
         "pause/resume-tts": {
             "description": "Pause or continue Text to Speech"
+        },
+        "load-settings": {
+            "description": "Load saved changes"
         }
-
     }
 }

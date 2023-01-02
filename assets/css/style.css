@@ -1,0 +1,979 @@
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 2vw;
+  width: 800px;
+}
+
+
+.franja1 {
+  background-color: #193774;
+  width: 100%;
+  height: 7px;
+}
+
+.franja2 {
+  background-color: #438BFF;
+  width: 100%;
+  height: 7px;
+}
+
+.franja3 {
+  background-color: #193774;
+  width: 100%;
+  height: 7px;
+}
+
+.logo {
+  background-color: #193772;
+  height: auto;
+  border-radius: 0px 0px 12px 12px;
+  padding: 1%;
+  border-left: 6px solid #438BFF;
+  border-right: 6px solid #438BFF;
+  border-bottom: 6px solid #438BFF;
+}
+
+.logo:hover {
+  cursor: pointer;
+}
+
+.logo img {
+  width: 50px;
+  padding-top: 20px;
+}
+
+.opciones-menu {
+  display: flex;
+  justify-content: left;
+  width: 100%;
+}
+
+.zoom {
+  margin-left: 6px;
+  margin-top: 6px;
+}
+
+.zoom:hover {
+  cursor: pointer;
+}
+
+.zoom-in {
+  display: block;
+  background-color: #193772;
+  border-radius: 6px 6px 6px 6px;
+  width: 30px;
+  height: 30px;
+  padding: 7px;
+  margin-bottom: 6px;
+}
+
+.zoom-out {
+  display: block;
+  background-color: #193772;
+  border-radius: 6px 6px 6px 6px;
+  width: 30px;
+  height: 30px;
+  padding: 7px;
+}
+
+.interlineado {
+  margin-left: 6px;
+  margin-top: 6px;
+}
+
+.interlineado:hover {
+  cursor: pointer;
+}
+
+.inter-mas {
+  display: block;
+  background-color: #193772;
+  border-radius: 6px 6px 6px 6px;
+  width: 30px;
+  height: 30px;
+  padding: 7px;
+  margin-bottom: 6px;
+}
+
+.inter-menos {
+  display: block;
+  background-color: #193772;
+  border-radius: 6px 6px 6px 6px;
+  width: 30px;
+  height: 30px;
+  padding: 7px;
+}
+
+.tipografia {
+  display: none;
+  display: flex;
+  background-color: #193772;
+  color: #ffffff;
+  margin-top: 6px;
+  margin-left: 6px;
+  border-radius: 0px 0px 12px 12px;
+  padding-left: 8px;
+  padding-right: 8px;
+  height: 45px;
+  align-items: center;
+}
+
+.tipografia .icono {
+  margin-left: 7px;
+}
+
+.narrador-tts:hover {
+  cursor: pointer;
+}
+
+.narrador-tts {
+  display: block;
+  display: flex;
+  background-color: #193772;
+  color: #ffffff;
+  margin-top: 6px;
+  margin-left: 6px;
+  border-radius: 0px 0px 12px 12px;
+  padding-left: 8px;
+  padding-right: 8px;
+  height: 45px;
+  align-items: center;
+}
+
+.narrador-tts:hover {
+  cursor: pointer;
+}
+
+.narrador-pausa {
+  display: block;
+  display: flex;
+  background-color: #193772;
+  color: #ffffff;
+  margin-top: 6px;
+  margin-left: 6px;
+  border-radius: 0px 0px 12px 12px;
+  padding-left: 8px;
+  padding-right: 8px;
+  height: 45px;
+  align-items: center;
+}
+
+.narrador-pausa:hover {
+  cursor: pointer;
+}
+
+.narrador .texto {
+  margin-top: 6px;
+}
+
+.narrador svg {
+  margin-top: 6px;
+  width: 20px;
+  height: 20px;
+}
+
+#ttsIcon {
+  fill: #ffffff;
+}
+
+.narrador .icono {
+  margin-left: 7px;
+}
+
+.narrador-pausa .icono {
+  margin-left: 22px;
+}
+
+/* .narrador{
+  display: block;
+  display: flex;
+  background-color: #193772;
+  color: #ffffff;
+  margin-top: 6px;
+  margin-left: 6px;
+  border-radius: 0px 0px 12px 12px;
+  padding-left: 8px;
+  padding-right: 8px;
+  height: 45px;
+  align-items: center;
+} */
+
+/* .narrador svg{
+    width: 20px;
+    height: 20px;
+}
+
+.narrador .icono{
+    margin-left: 7px;
+} */
+
+.invertircolor {
+  display: flex;
+  background-color: #193772;
+  color: #ffffff;
+  margin-top: 6px;
+  margin-left: 6px;
+  border-radius: 0px 0px 12px 12px;
+  padding-left: 8px;
+  padding-right: 8px;
+  height: 45px;
+  align-items: center;
+}
+
+.invertircolor svg {
+  width: 20px;
+  height: 20px;
+}
+
+.invertircolor .icono {
+  margin-left: 7px;
+}
+
+.colordefondo {
+  display: flex;
+  background-color: #193772;
+  color: #ffffff;
+  margin-top: 6px;
+  margin-left: 6px;
+  border-radius: 0px 0px 12px 12px;
+  padding-left: 8px;
+  padding-right: 8px;
+  height: 45px;
+  align-items: center;
+}
+
+.colordefondo svg {
+  width: 20px;
+  height: 20px;
+}
+
+.colordefondo .icono {
+  margin-left: 7px;
+}
+
+.configuracion {
+  margin-left: 6px;
+  margin-top: 6px;
+}
+
+.help {
+  display: block;
+  background-color: #193772;
+  border-radius: 6px 6px 6px 6px;
+  margin-top: 6px;
+  margin-left: 6px;
+  width: 30px;
+  height: 30px;
+  padding: 7px;
+  margin-bottom: 6px;
+}
+
+.help svg {
+  width: 30px;
+  height: 30px;
+}
+
+.help:hover {
+  cursor: pointer;
+}
+
+.cargar {
+  display: block;
+  background-color: #193772;
+  border-radius: 6px 6px 6px 6px;
+  margin-top: 6px;
+  margin-left: 6px;
+  width: 30px;
+  height: 30px;
+  padding: 7px;
+  margin-bottom: 6px;
+}
+
+.cargar:hover {
+  cursor: pointer;
+}
+
+.config {
+  display: block;
+  background-color: #193772;
+  border-radius: 6px 6px 6px 6px;
+  width: 30px;
+  height: 30px;
+  padding: 7px;
+}
+
+/* Estilos para el menú DropDown */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #193772;
+  z-index: 1;
+  border-top: 15px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 6px 6px 6px 6px;
+}
+
+.dropdown:hover {
+  cursor: pointer;
+}
+
+/* .dropdown:hover .dropdown-content {
+  display: block;
+} */
+
+.opcionestipo {
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.titulos {
+  width: 90px;
+  padding-left: 15px;
+}
+
+.selectorcolor {
+  margin-left: 10px;
+}
+
+.colorPicker {
+  /*
+    padding: 0;
+    margin: 0;
+    border-radius: 7px;
+    */
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.colorPicker::-webkit-color-swatch {
+  border-radius: 3px;
+  border: none;
+}
+
+
+.selectortipo {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+#fontFamily {
+  margin: 0;
+  padding: 0;
+  width: 120px;
+  height: 25px;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 7px;
+  border: none;
+  font-size: 2vw;
+  color: #193772;
+  font-weight: 400;
+}
+
+.kerning {
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+
+/* Estilos para el Label */
+.interletras {
+  display: block;
+  position: relative;
+  padding-top: 5px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Esconder el checkbox por defecto */
+.interletras input {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Crear checkbox personalizado*/
+.checkmark {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 5px;
+  top: 0;
+  left: 1;
+  height: 25px;
+  width: 25px;
+  background-color: #ffffff;
+  border-radius: 3px;
+}
+
+/* Mouse-over */
+.interletras:hover input~.checkmark {
+  background-color: #ffffff;
+}
+
+/* Color de fondo cuano este seleccionado */
+.interletras input:checked~.checkmark {
+  background-color: #ffffff;
+}
+
+/* Crear icono de seleccionado (esconder en caso contrario) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Mostrar cuando este seleccionado */
+.interletras input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Estilos de indicador de seleccionado */
+.interletras .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid rgb(3, 38, 91);
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.fondopreterminado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: max-content;
+}
+
+.encabezado-fondo {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+}
+
+.colores-pred {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 5px;
+}
+
+#color-uno {
+  display: block;
+  width: 35px;
+  height: 25px;
+  border-radius: 3px;
+  background-color: #1baec2;
+  cursor: pointer;
+  color: #000000;
+  text-align: center;
+}
+
+#color-dos {
+  display: block;
+  width: 35px;
+  height: 25px;
+  border-radius: 3px;
+  background-color: #ff0000;
+  cursor: pointer;
+  color: #ffffff;
+  text-align: center;
+}
+
+#color-tres {
+  display: block;
+  width: 35px;
+  height: 25px;
+  border-radius: 3px;
+  background-color: #ffdd00;
+  cursor: pointer;
+  color: #000000;
+  text-align: center;
+}
+
+#color-cuatro {
+  display: block;
+  width: 35px;
+  height: 25px;
+  border-radius: 3px;
+  background-color: #050505;
+  cursor: pointer;
+  color: #ffffff;
+  text-align: center;
+}
+
+#color-original {
+  display: block;
+  width: 35px;
+  height: 25px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  cursor: pointer;
+  color: #050505;
+  text-align: center;
+}
+
+.colores-pers {
+  display: flex;
+  justify-content: center;
+}
+
+#colorPickerBackground {
+  appearance: none;
+  width: 100px;
+  height: 45px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  padding-top: 5px;
+}
+
+#colorPickerBackground::-webkit-color-swatch {
+  border-radius: 3px;
+  border: none;
+}
+
+.invertir-colo {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+/* Estilos para el Label */
+.invertir {
+  display: block;
+  position: relative;
+  padding-top: 5px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Esconder el checkbox por defecto */
+.invertir input {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Crear checkbox personalizado*/
+.checkmark {
+  position: absolute;
+  margin-top: 5px;
+  top: 0;
+  left: 1;
+  height: 25px;
+  width: 25px;
+  background-color: #ffffff;
+  border-radius: 3px;
+}
+
+/* Mouse-over */
+.invertir:hover input~.checkmark {
+  background-color: #ffffff;
+}
+
+/* Color de fondo cuano este seleccionado */
+.invertir input:checked~.checkmark {
+  background-color: #ffffff;
+}
+
+/* Crear icono de seleccionado (esconder en caso contrario) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Mostrar cuando este seleccionado */
+.invertir input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Estilos de indicador de seleccionado */
+.invertir .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid rgb(3, 38, 91);
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* Estilos para el menu de cnfiguración */
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #193772;
+  z-index: 1;
+  border-top: 10px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 10px 10px 10px 10px;
+  margin-left: -125px;
+}
+
+.dropdown:hover {
+  cursor: pointer;
+}
+
+/* .dropdown:hover .dropdown-menu {
+  display: block;
+} */
+
+.conf-logo {
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 270px;
+  height: 150px;
+  background-color: #193772;
+}
+
+.conf-opciones {
+  width: 270px;
+  color: #193772;
+  padding-left: 5px;
+}
+
+.conf-casillas {
+  background-color: #ffffff;
+  border-left: #193772 solid 10px;
+  border-right: #193772 solid 10px;
+  padding-bottom: 5px;
+  font-size: 2.3vw;
+}
+
+/* Estilos para el Label */
+.conf-label {
+  display: block;
+  position: relative;
+  padding-top: 5px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding-left: 40px;
+}
+
+/* Esconder el checkbox por defecto */
+.conf-label input {
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Crear checkbox personalizado*/
+.conf-label .checkmark {
+  position: absolute;
+  margin-top: 5px;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #193772;
+  border-radius: 3px;
+}
+
+/* Mouse-over */
+.conf-label:hover input~.checkmark {
+  background-color: #193772;
+}
+
+/* Color de fondo cuano este seleccionado */
+.conf-label input:checked~.checkmark {
+  background-color: #193772;
+}
+
+/* Crear icono de seleccionado (esconder en caso contrario) */
+.conf-label .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Mostrar cuando este seleccionado */
+.conf-label input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Estilos de indicador de seleccionado */
+.conf-label .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid rgb(255, 255, 255);
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* Estilos para Género de Voz */
+
+.conf-voz {
+  background-color: #ffffff;
+  border-left: #193772 solid 10px;
+  border-right: #193772 solid 10px;
+}
+
+.encabezado-conf {
+  color: #193772;
+  font-size: 2vw;
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.tonovoz-opciones {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Customize the label (the container) */
+.tonovoz {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #193772;
+}
+
+/* Hide the browser's default radio button */
+.tonovoz input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.tonovoz .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #999999;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.tonovoz:hover input~.checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.tonovoz input:checked~.checkmark {
+  background-color: #193772;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.tonovoz .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.tonovoz input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.tonovoz .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+/* Estilos para el tono de Voz */
+
+input[type=range] {
+  height: 41px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #2A87B6;
+  border-radius: 25px;
+  border: 1px solid #0E6D8A;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #828282;
+  border: 1px solid #8A8A8A;
+  height: 25px;
+  width: 25px;
+  border-radius: 6px;
+  background: #193772;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -9.5px;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #2A87B6;
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 16px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #2A87B6;
+  border-radius: 25px;
+  border: 1px solid #0E6D8A;
+}
+
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #828282;
+  border: 1px solid #8A8A8A;
+  height: 33px;
+  width: 33px;
+  border-radius: 6px;
+  background: #193772;
+  cursor: pointer;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 16px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type=range]::-ms-fill-lower {
+  background: #2A87B6;
+  border: 1px solid #0E6D8A;
+  border-radius: 50px;
+  box-shadow: 0px 0px 0px #000000;
+}
+
+input[type=range]::-ms-fill-upper {
+  background: #2A87B6;
+  border: 1px solid #0E6D8A;
+  border-radius: 50px;
+  box-shadow: 0px 0px 0px #000000;
+}
+
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 1px 1px 1px #828282;
+  border: 1px solid #8A8A8A;
+  height: 33px;
+  width: 33px;
+  border-radius: 6px;
+  background: #193772;
+  cursor: pointer;
+}
+
+input[type=range]:focus::-ms-fill-lower {
+  background: #2A87B6;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+  background: #2A87B6;
+}
+
+
+#colorPickerResaltado {
+  appearance: none;
+  width: 100px;
+  height: 45px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  padding-top: 5px;
+}
+
+#colorPickerBackground::-webkit-color-swatch {
+  border-radius: 3px;
+  border: none;
+}
+
+#savebtn {
+  display: flex;
+  justify-content: center;
+}
+
+#save {
+  transition-duration: 0.4s;
+  background-color: white;
+  color: black;
+  border: 2px solid #193772;
+  width: fit-content;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#save:hover {
+  background-color: #193772;
+  color: white;
+}
+
+#save span {
+  text-align: center;
+}
